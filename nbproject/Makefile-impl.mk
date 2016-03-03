@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=test_machine
+PROJECTNAME=machine_panel
 
 # Active Configuration
 DEFAULTCONF=Debug

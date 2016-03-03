@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=GNU-Linux
 CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux
-CND_ARTIFACT_NAME_Debug=test_machine
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/test_machine
+CND_ARTIFACT_NAME_Debug=machine_panel
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/machine_panel
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux/package
-CND_PACKAGE_NAME_Debug=testmachine.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/testmachine.tar
+CND_PACKAGE_NAME_Debug=machinepanel.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/machinepanel.tar
 # Release configuration
 CND_PLATFORM_Release=None-Windows
 CND_ARTIFACT_DIR_Release=dist/Release/None-Windows
-CND_ARTIFACT_NAME_Release=test_machine
-CND_ARTIFACT_PATH_Release=dist/Release/None-Windows/test_machine
+CND_ARTIFACT_NAME_Release=machine_panel
+CND_ARTIFACT_PATH_Release=dist/Release/None-Windows/machine_panel
 CND_PACKAGE_DIR_Release=dist/Release/None-Windows/package
-CND_PACKAGE_NAME_Release=testmachine.tar
-CND_PACKAGE_PATH_Release=dist/Release/None-Windows/package/testmachine.tar
+CND_PACKAGE_NAME_Release=machinepanel.tar
+CND_PACKAGE_PATH_Release=dist/Release/None-Windows/package/machinepanel.tar
 #
 # include compiler specific variables
 #

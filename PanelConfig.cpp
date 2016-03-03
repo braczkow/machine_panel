@@ -55,6 +55,7 @@ void PanelConfig::tryReadConfig(const std::string& aConfigPath)
   buttonConfig.okBtnPin = buttons["ok"].asUInt();
   buttonConfig.backBtnPin = buttons["back"].asUInt();
 
+  LOG("end.");
 }
 
 

@@ -24,13 +24,12 @@ int main(int argc, char** argv)
     exit(-1);
   }
   
-
   auto panelController = std::make_shared<ctrl::PanelController>(panelConfig);
   panelController->start();
 
   while (1)
   {
-
+    panelController->work();
 
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
   }

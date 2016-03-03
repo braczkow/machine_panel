@@ -38,6 +38,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/InputHandler.o \
 	${OBJECTDIR}/PanelConfig.o \
 	${OBJECTDIR}/PanelController.o \
+	${OBJECTDIR}/PanelScenes.o \
 	${OBJECTDIR}/jsoncpp.o \
 	${OBJECTDIR}/main.o
 
@@ -60,11 +61,11 @@ LDLIBSOPTIONS=-lboost_filesystem -lboost_system -lwiringPi -lpthread
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/test_machine
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/machine_panel
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/test_machine: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/machine_panel: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/test_machine ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/machine_panel ${OBJECTFILES} ${LDLIBSOPTIONS}
 
 ${OBJECTDIR}/InputHandler.o: InputHandler.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -80,6 +81,11 @@ ${OBJECTDIR}/PanelController.o: PanelController.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/PanelController.o PanelController.cpp
+
+${OBJECTDIR}/PanelScenes.o: PanelScenes.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/PanelScenes.o PanelScenes.cpp
 
 ${OBJECTDIR}/jsoncpp.o: jsoncpp.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -97,7 +103,7 @@ ${OBJECTDIR}/main.o: main.cpp
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/test_machine
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/machine_panel
 
 # Subprojects
 .clean-subprojects:

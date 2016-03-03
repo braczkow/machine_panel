@@ -9,9 +9,11 @@
         <itemPath>json/json.h</itemPath>
       </logicalFolder>
       <itemPath>IInputReceiver.h</itemPath>
+      <itemPath>IPanelScene.h</itemPath>
       <itemPath>InputHandler.h</itemPath>
       <itemPath>PanelConfig.h</itemPath>
       <itemPath>PanelController.h</itemPath>
+      <itemPath>PanelScenes.h</itemPath>
       <itemPath>log.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -24,6 +26,7 @@
       <itemPath>InputHandler.cpp</itemPath>
       <itemPath>PanelConfig.cpp</itemPath>
       <itemPath>PanelController.cpp</itemPath>
+      <itemPath>PanelScenes.cpp</itemPath>
       <itemPath>jsoncpp.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
@@ -68,6 +71,8 @@
       </compileType>
       <item path="IInputReceiver.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="IPanelScene.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="InputHandler.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="InputHandler.h" ex="false" tool="3" flavor2="0">
@@ -79,6 +84,10 @@
       <item path="PanelController.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="PanelController.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="PanelScenes.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="PanelScenes.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="json/json-forwards.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -113,6 +122,8 @@
       </compileType>
       <item path="IInputReceiver.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="IPanelScene.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="InputHandler.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="InputHandler.h" ex="false" tool="3" flavor2="0">
@@ -124,6 +135,10 @@
       <item path="PanelController.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="PanelController.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="PanelScenes.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="PanelScenes.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="json/json-forwards.h" ex="false" tool="3" flavor2="0">
       </item>
