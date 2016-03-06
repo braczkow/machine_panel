@@ -36,10 +36,14 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/InputHandler.o \
+	${OBJECTDIR}/LcdView.o \
+	${OBJECTDIR}/MachineModel.o \
 	${OBJECTDIR}/PanelConfig.o \
 	${OBJECTDIR}/PanelController.o \
-	${OBJECTDIR}/PanelScenes.o \
+	${OBJECTDIR}/PanelScene.o \
 	${OBJECTDIR}/jsoncpp.o \
+	${OBJECTDIR}/mach/MachineClient.o \
+	${OBJECTDIR}/mach/MachineService.o \
 	${OBJECTDIR}/main.o
 
 
@@ -57,7 +61,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-lboost_filesystem -lboost_system -lwiringPi -lpthread
+LDLIBSOPTIONS=-lboost_filesystem -lboost_system -lwiringPi -lpthread -lwiringPiDev
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -72,6 +76,16 @@ ${OBJECTDIR}/InputHandler.o: InputHandler.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/InputHandler.o InputHandler.cpp
 
+${OBJECTDIR}/LcdView.o: LcdView.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/LcdView.o LcdView.cpp
+
+${OBJECTDIR}/MachineModel.o: MachineModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MachineModel.o MachineModel.cpp
+
 ${OBJECTDIR}/PanelConfig.o: PanelConfig.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -82,15 +96,25 @@ ${OBJECTDIR}/PanelController.o: PanelController.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/PanelController.o PanelController.cpp
 
-${OBJECTDIR}/PanelScenes.o: PanelScenes.cpp 
+${OBJECTDIR}/PanelScene.o: PanelScene.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/PanelScenes.o PanelScenes.cpp
+	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/PanelScene.o PanelScene.cpp
 
 ${OBJECTDIR}/jsoncpp.o: jsoncpp.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/jsoncpp.o jsoncpp.cpp
+
+${OBJECTDIR}/mach/MachineClient.o: mach/MachineClient.cpp 
+	${MKDIR} -p ${OBJECTDIR}/mach
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/mach/MachineClient.o mach/MachineClient.cpp
+
+${OBJECTDIR}/mach/MachineService.o: mach/MachineService.cpp 
+	${MKDIR} -p ${OBJECTDIR}/mach
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/mach/MachineService.o mach/MachineService.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}

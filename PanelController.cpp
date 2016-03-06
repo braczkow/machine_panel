@@ -5,71 +5,59 @@ namespace ctrl
 
 PanelController::PanelController(std::shared_ptr<cfg::PanelConfig> aPanelConfig) :
 _panelConfig(aPanelConfig)
-{  
+{
   LOG("");
-  auto main1 = model::PanelScene::createPanelScene(model::SceneType::MAIN_SCENE_1);
-  auto main2 = model::PanelScene::createPanelScene(model::SceneType::MAIN_SCENE_2);
-  auto main3 = model::PanelScene::createPanelScene(model::SceneType::MAIN_SCENE_3);
-  auto main1_c = model::PanelScene::createPanelScene(model::SceneType::MAIN_SCENE_1_CHILD);
-  auto main2_cA = model::PanelScene::createPanelScene(model::SceneType::MAIN_SCENE_2_CHILD_A);
-  auto main2_cB = model::PanelScene::createPanelScene(model::SceneType::MAIN_SCENE_2_CHILD_B);
-  auto main2_cA_c = model::PanelScene::createPanelScene(model::SceneType::MAIN_SCENE_2_CHILD_A_CHILD);
-  auto main3_c = model::PanelScene::createPanelScene(model::SceneType::MAIN_SCENE_3_CHILD);
+
+  auto main = model::PanelScene::createPanelScene(model::SceneType::MAIN_SCENE);
+  auto sunrise = model::PanelScene::createPanelScene(model::SceneType::SUNRISE_SCENE);
+  auto sunrise_edit = model::PanelScene::createPanelScene(model::SceneType::SUNRISE_EDIT);
+  sunrise_edit->setFields(_machineModel.getSunRiseAsVector());
+
+  auto sundown = model::PanelScene::createPanelScene(model::SceneType::SUNDOWN_SCENE);
+  auto sundown_edit = model::PanelScene::createPanelScene(model::SceneType::SUNDOWN_EDIT);
+  sundown_edit->setFields(_machineModel.getSunDownAsVector());
+
+  main->setNextScene(sunrise);
+  main->setPrevScene(sundown);
+
+  sunrise->setChildScene(sunrise_edit);
+  sunrise_edit->setParentScene(sunrise);
+  sunrise_edit->setChildScene(sunrise);
+  sunrise->setNextScene(sundown);
+  sunrise->setPrevScene(main);
+
+  sundown->setChildScene(sundown_edit);
+  sundown_edit->setParentScene(sundown);
+  sundown_edit->setChildScene(sundown);
+  sundown->setNextScene(main);
+  sundown->setPrevScene(sunrise);
+
+  _currentScene = main;
+
+  _panelScenes.push_back(std::unique_ptr<model::PanelScene>(main));
+  _panelScenes.push_back(std::unique_ptr<model::PanelScene>(sunrise));
+  _panelScenes.push_back(std::unique_ptr<model::PanelScene>(sunrise_edit));
+  _panelScenes.push_back(std::unique_ptr<model::PanelScene>(sundown));
+  _panelScenes.push_back(std::unique_ptr<model::PanelScene>(sundown_edit));
   
-  LOG("");
-  
-  main1->setNextScene(main2);
-  LOG("");
-  
-  main1->setPrevScene(main3);
-  main1->setChildScene(main1_c);
-  
-  main2->setNextScene(main3);
-  main2->setPrevScene(main1);
-  main2->setChildScene(main2_cA);
-  
-  main3->setNextScene(main1);
-  main3->setPrevScene(main2);
-  main3->setChildScene(main3_c);
-  
-  main2_cA->setNextScene(main2_cB);
-  main2_cA->setPrevScene(main2_cB);
-  main2_cA->setChildScene(main2_cA_c);
-  main2_cA->setParentScene(main2);
-  
-  main2_cB->setNextScene(main2_cA);
-  main2_cB->setPrevScene(main2_cA);
-  main2_cB->setParentScene(main2);
-  
-  main3_c->setParentScene(main3);
-  
-  main2_cA_c->setParentScene(main2_cA);
-  
-  LOG("");
-  
-  _panelScenes.push_back(main1);
-  _panelScenes.push_back(main2);
-  _panelScenes.push_back(main3);
-  _panelScenes.push_back(main1_c);
-  _panelScenes.push_back(main2_cA);
-  _panelScenes.push_back(main2_cA_c);
-  _panelScenes.push_back(main2_cB);
-  _panelScenes.push_back(main3_c);
-  
+  _lcdView = std::make_shared<view::LcdView>(_panelConfig);
+
 }
 
 PanelController::~PanelController()
 {
-  for (auto& panelScene : _panelScenes)
-  {
-    delete panelScene;
-  }
+  //  for (auto& panelScene : _panelScenes)
+  //  {
+  //    delete panelScene;
+  //  }
 }
 
 void PanelController::start()
 {
   _inputHandler.addPin(_panelConfig->buttonConfig.upBtnPin);
   _inputHandler.addPin(_panelConfig->buttonConfig.downBtnPin);
+  _inputHandler.addPin(_panelConfig->buttonConfig.leftBtnPin);
+  _inputHandler.addPin(_panelConfig->buttonConfig.rightBtnPin);
   _inputHandler.addPin(_panelConfig->buttonConfig.okBtnPin);
   _inputHandler.addPin(_panelConfig->buttonConfig.backBtnPin);
 
@@ -84,7 +72,7 @@ void PanelController::work()
   std::deque<input::InputEvent> lastEvents;
   {
     std::lock_guard<std::mutex> lock(_mutex);
-    lastEvents = std::move(_inputQueue);
+    lastEvents = _inputQueue;
     _inputQueue.clear();
   }
 
@@ -97,29 +85,92 @@ void PanelController::work()
 
 void PanelController::processInputEvent(const input::InputEvent& e)
 {
+  LOG("");
   if (e.eventCode != input::InputEvent::KEY_UP)
   {
-    LOG("Processing KEY_UP only.");
     return;
   }
 
+  model::SceneEvent::SceneEventCode sceneEvent = getSceneEventByInputEvent(e);
+  
+
+
+  _currentScene->updateFields(sceneEvent);
+
+  if (_currentScene->isEditScene() &&
+      sceneEvent == model::SceneEvent::KEY_OK)
+  {
+    handleOkOnEditScene();
+  }
+
+  _currentScene = _currentScene->getNextScene(sceneEvent);
+
+  updateView();
+}
+
+model::SceneEvent::SceneEventCode 
+PanelController::getSceneEventByInputEvent(const input::InputEvent& e)
+{
+  LOG("");
   if (e.pinNo == _panelConfig->buttonConfig.upBtnPin)
   {
-    processUpBtn();
+    return model::SceneEvent::KEY_UP;
   }
   else if (e.pinNo == _panelConfig->buttonConfig.downBtnPin)
   {
-    processDownBtn();
+    return model::SceneEvent::KEY_DOWN;
+  }
+  else if (e.pinNo == _panelConfig->buttonConfig.leftBtnPin)
+  {
+    return model::SceneEvent::KEY_LEFT;
+  }
+  else if (e.pinNo == _panelConfig->buttonConfig.rightBtnPin)
+  {
+    return model::SceneEvent::KEY_RIGHT;
   }
   else if (e.pinNo == _panelConfig->buttonConfig.okBtnPin)
   {
-    processOkBtn();
+    return model::SceneEvent::KEY_OK;
   }
   else if (e.pinNo == _panelConfig->buttonConfig.backBtnPin)
   {
-    processBackBtn();
+    return model::SceneEvent::KEY_BACK;
   }
+  
+  throw ControllerException("Unknown input event.");
+}
 
+void PanelController::handleOkOnEditScene()
+{
+  LOG("");
+  auto sceneType = _currentScene->getSceneType();
+  
+  switch (sceneType)
+  {
+    case model::SceneType::SUNRISE_EDIT:
+    {
+      auto fields = _currentScene->getFields();
+      _machineModel.setSunRise( fields[0], fields[1], fields[2], fields[3] );
+
+      break;
+    }
+    case model::SceneType::SUNDOWN_EDIT:
+    {
+      auto fields = _currentScene->getFields();
+      _machineModel.setSunDown( fields[0], fields[1], fields[2], fields[3] );
+      break;
+    }
+  }
+  
+  
+}
+
+void PanelController::updateView()
+{
+  LOG("");
+  
+  _lcdView->renderScene(_currentScene, _machineModel);
+ 
 }
 
 void PanelController::onInputEvent(input::InputEvent e)
@@ -128,6 +179,8 @@ void PanelController::onInputEvent(input::InputEvent e)
   std::lock_guard<std::mutex> lock(_mutex);
 
   _inputQueue.push_back(e);
+
+  LOG("");
 
 }
 

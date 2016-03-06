@@ -35,7 +35,7 @@ void InputHandler::registerInputReceiver(std::weak_ptr<IInputReceiver> aInputRec
 void InputHandler::handlerWorker()
 {
   LOG("");
-  wiringPiSetup();
+  //wiringPiSetup();
 
   for (auto pinNo : _pins)
   {
@@ -60,7 +60,7 @@ void InputHandler::handlerWorker()
 
     }
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(200));
+    std::this_thread::sleep_for(std::chrono::milliseconds(20));
   }
 }
 
