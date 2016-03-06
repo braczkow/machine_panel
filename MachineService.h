@@ -1,6 +1,7 @@
 #pragma once
-
-#include "mach/MachineRequest.h"
+#include "MachineRequest.h"
+#include "Runnable.h"
+#include "log.h"
 
 #include <functional>
 #include <mutex>
@@ -10,23 +11,21 @@
 namespace mach
 {
 class MachineClient;
+class MachineRequest;
 
-
-
-class MachineService
+class MachineService : public Runnable
 {
 public:
   MachineService();
   virtual ~MachineService();
   
-  std::shared_ptr<MachineService> getMachineService();
-  
   void getTemperature(std::shared_ptr<GetTemperatureRequest>);
   
-  void start();
+  virtual void start();
+  virtual void stop();
   
 protected:
-  void work();
+  virtual void work();
   
   std::shared_ptr<std::thread> _thread;
   std::mutex _mutex;

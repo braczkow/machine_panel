@@ -37,13 +37,13 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/InputHandler.o \
 	${OBJECTDIR}/LcdView.o \
+	${OBJECTDIR}/MachineClient.o \
 	${OBJECTDIR}/MachineModel.o \
+	${OBJECTDIR}/MachineService.o \
 	${OBJECTDIR}/PanelConfig.o \
 	${OBJECTDIR}/PanelController.o \
 	${OBJECTDIR}/PanelScene.o \
 	${OBJECTDIR}/jsoncpp.o \
-	${OBJECTDIR}/mach/MachineClient.o \
-	${OBJECTDIR}/mach/MachineService.o \
 	${OBJECTDIR}/main.o
 
 
@@ -81,10 +81,20 @@ ${OBJECTDIR}/LcdView.o: LcdView.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/LcdView.o LcdView.cpp
 
+${OBJECTDIR}/MachineClient.o: MachineClient.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MachineClient.o MachineClient.cpp
+
 ${OBJECTDIR}/MachineModel.o: MachineModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MachineModel.o MachineModel.cpp
+
+${OBJECTDIR}/MachineService.o: MachineService.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MachineService.o MachineService.cpp
 
 ${OBJECTDIR}/PanelConfig.o: PanelConfig.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -105,16 +115,6 @@ ${OBJECTDIR}/jsoncpp.o: jsoncpp.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/jsoncpp.o jsoncpp.cpp
-
-${OBJECTDIR}/mach/MachineClient.o: mach/MachineClient.cpp 
-	${MKDIR} -p ${OBJECTDIR}/mach
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/mach/MachineClient.o mach/MachineClient.cpp
-
-${OBJECTDIR}/mach/MachineService.o: mach/MachineService.cpp 
-	${MKDIR} -p ${OBJECTDIR}/mach
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/mach/MachineService.o mach/MachineService.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}

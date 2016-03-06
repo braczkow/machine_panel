@@ -64,7 +64,7 @@ void PanelController::start()
 
   _inputHandler.registerInputReceiver(shared_from_this());
 
-  _inputHandler.startHandler();
+  _inputHandler.start();
 }
 
 void PanelController::work()

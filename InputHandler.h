@@ -1,6 +1,7 @@
 #pragma once
 #include "log.h"
 #include "IInputReceiver.h"
+#include "Runnable.h"
 
 #include <thread>
 #include <mutex>
@@ -9,7 +10,6 @@
 
 namespace input
 {
-
 struct PinState
 {
 
@@ -25,8 +25,7 @@ struct PinState
   unsigned int pinNo;
   unsigned int pinState;
 };
-
-class InputHandler
+class InputHandler //: public Runnable
 {
 public:
   InputHandler();
@@ -36,10 +35,18 @@ public:
 
   void registerInputReceiver(std::weak_ptr<IInputReceiver> aInputReceiver);
 
-  void startHandler();
-  void stopHandler();
+  void start();
+  void stop();
+  
+protected:
+  void work();
 
 private:
+  void sendInputEvent(
+      unsigned int aPinNo,
+      int aOldValue,
+      int aNewValuve);
+
   std::map<unsigned int, int> _pinState;
   std::vector<unsigned int> _pins;
 
@@ -49,12 +56,6 @@ private:
   bool _doContinue;
 
 
-  void handlerWorker();
-
-  void sendInputEvent(
-      unsigned int aPinNo,
-      int aOldValue,
-      int aNewValuve);
 
 };
 

@@ -32,7 +32,7 @@ void InputHandler::registerInputReceiver(std::weak_ptr<IInputReceiver> aInputRec
   _inputReceivers.push_back(aInputReceiver);
 }
 
-void InputHandler::handlerWorker()
+void InputHandler::work()
 {
   LOG("");
   //wiringPiSetup();
@@ -64,7 +64,7 @@ void InputHandler::handlerWorker()
   }
 }
 
-void InputHandler::startHandler()
+void InputHandler::start()
 {
   LOG("Starting thread.");
 
@@ -74,11 +74,11 @@ void InputHandler::startHandler()
     return;
   }
 
-  _thread = std::make_shared<std::thread>(&InputHandler::handlerWorker, this);
+  _thread = std::make_shared<std::thread>(&InputHandler::work, this);
 
 }
 
-void InputHandler::stopHandler()
+void InputHandler::stop()
 {
   LOG("");
 

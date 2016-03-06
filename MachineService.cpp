@@ -1,7 +1,7 @@
 #include "log.h"
-#include "mach/MachineService.h"
-#include "mach/MachineClient.h"
-#include "mach/MachineRequest.h"
+#include "MachineService.h"
+#include "MachineClient.h"
+#include "MachineRequest.h"
 
 #include <memory>
 #include <iostream>
@@ -29,6 +29,14 @@ void MachineService::start()
 {
   LOG("");
   _thread = std::make_shared<std::thread>(&MachineService::work, this);
+}
+
+void MachineService::stop()
+{
+  LOG("");
+  _doContinue = false;
+  
+  _thread->join();
 }
 
 void MachineService::work()

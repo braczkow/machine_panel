@@ -8,19 +8,19 @@
         <itemPath>json/json-forwards.h</itemPath>
         <itemPath>json/json.h</itemPath>
       </logicalFolder>
-      <logicalFolder name="f1" displayName="mach" projectFiles="true">
-        <itemPath>mach/MachineClient.h</itemPath>
-        <itemPath>mach/MachineRequest.h</itemPath>
-        <itemPath>mach/MachineService.h</itemPath>
-      </logicalFolder>
       <itemPath>IInputReceiver.h</itemPath>
       <itemPath>IPanelScene.h</itemPath>
       <itemPath>InputHandler.h</itemPath>
       <itemPath>LcdView.h</itemPath>
+      <itemPath>MachineClient.h</itemPath>
       <itemPath>MachineModel.h</itemPath>
+      <itemPath>MachineRequest.h</itemPath>
+      <itemPath>MachineResponse.h</itemPath>
+      <itemPath>MachineService.h</itemPath>
       <itemPath>PanelConfig.h</itemPath>
       <itemPath>PanelController.h</itemPath>
       <itemPath>PanelScene.h</itemPath>
+      <itemPath>Runnable.h</itemPath>
       <itemPath>log.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -30,17 +30,13 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <logicalFolder name="f1" displayName="mach" projectFiles="true">
-        <itemPath>mach/MachineClient.cpp</itemPath>
-        <itemPath>mach/MachineService.cpp</itemPath>
-      </logicalFolder>
-      <logicalFolder name="f2" displayName="panel" projectFiles="true">
-        <itemPath>PanelConfig.cpp</itemPath>
-        <itemPath>PanelController.cpp</itemPath>
-      </logicalFolder>
       <itemPath>InputHandler.cpp</itemPath>
       <itemPath>LcdView.cpp</itemPath>
+      <itemPath>MachineClient.cpp</itemPath>
       <itemPath>MachineModel.cpp</itemPath>
+      <itemPath>MachineService.cpp</itemPath>
+      <itemPath>PanelConfig.cpp</itemPath>
+      <itemPath>PanelController.cpp</itemPath>
       <itemPath>PanelScene.cpp</itemPath>
       <itemPath>jsoncpp.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
@@ -59,7 +55,6 @@
   </logicalFolder>
   <sourceRootList>
     <Elem>json</Elem>
-    <Elem>mach</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -98,9 +93,21 @@
       </item>
       <item path="LcdView.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="MachineClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="MachineClient.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="MachineModel.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="MachineModel.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="MachineRequest.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="MachineResponse.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="MachineService.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="MachineService.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="PanelConfig.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -114,6 +121,8 @@
       </item>
       <item path="PanelScene.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Runnable.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="json/json-forwards.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="json/json.h" ex="false" tool="3" flavor2="0">
@@ -121,16 +130,6 @@
       <item path="jsoncpp.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="log.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="mach/MachineClient.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="mach/MachineClient.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="mach/MachineRequest.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="mach/MachineService.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="mach/MachineService.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -167,9 +166,21 @@
       </item>
       <item path="LcdView.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="MachineClient.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="MachineClient.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="MachineModel.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="MachineModel.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="MachineRequest.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="MachineResponse.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="MachineService.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="MachineService.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="PanelConfig.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -183,6 +194,8 @@
       </item>
       <item path="PanelScene.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Runnable.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="json/json-forwards.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="json/json.h" ex="false" tool="3" flavor2="0">
@@ -190,16 +203,6 @@
       <item path="jsoncpp.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="log.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="mach/MachineClient.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="mach/MachineClient.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="mach/MachineRequest.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="mach/MachineService.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="mach/MachineService.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>

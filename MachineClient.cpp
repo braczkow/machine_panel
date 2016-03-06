@@ -1,12 +1,12 @@
-#include "mach/MachineClient.h"
-#include "mach/MachineService.h"
-#include "mach/MachineRequest.h"
+#include "MachineService.h"
+#include "MachineRequest.h"
+#include "MachineClient.h"
 #include "log.h"
+
+#include <memory>
 
 namespace mach
 {
-
-
 //static
 std::shared_ptr<MachineClient> MachineClient::createClient()
 {
@@ -38,8 +38,6 @@ void MachineClient::work()
     _responseCallbacks.clear();
   }
   
-  LOG("callbacks size: %d", callbacks.size());
-  
   for (auto& callback : callbacks)
   {
     callback();
@@ -51,7 +49,7 @@ void MachineClient::work()
 void MachineClient::getTemperature(std::function<void(std::shared_ptr<GetTemperatureResponse>)> aCallback)
 {
   LOG("");
-  auto req = std::make_shared< GetTemperatureRequest >(this);
+  auto req = std::make_shared< GetTemperatureRequest >(shared_from_this());
   req->responseCallback = aCallback;
   
   _machineService->getTemperature(req);
