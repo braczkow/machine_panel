@@ -1,16 +1,16 @@
-#include "PanelScene.h"
+#include "PanelSceneModel.h"
 
 namespace model
 {
 
-PanelScene::PanelScene(SceneType::SceneTypeCode aSceneTypeCode) :
+PanelSceneModel::PanelSceneModel(SceneType::SceneTypeCode aSceneTypeCode) :
 _sceneTypeCode(aSceneTypeCode),
 _isEditScene(false),
 _fieldIdx(0)
 {
 }
 
-PanelScene::PanelScene(SceneType::SceneTypeCode aSceneTypeCode, std::vector<int> aFields) :
+PanelSceneModel::PanelSceneModel(SceneType::SceneTypeCode aSceneTypeCode, std::vector<int> aFields) :
 _sceneTypeCode(aSceneTypeCode),
 _isEditScene(true),
 _fieldIdx(0),
@@ -19,13 +19,13 @@ _savedFields(aFields)
 {
 }
 
-PanelScene::~PanelScene()
+PanelSceneModel::~PanelSceneModel()
 {
 }
 
-PanelScene* PanelScene::createPanelScene(SceneType::SceneTypeCode aSceneTypeCode)
+PanelSceneModel* PanelSceneModel::createPanelScene(SceneType::SceneTypeCode aSceneTypeCode)
 {
-  auto panelScene = new PanelScene(aSceneTypeCode);
+  auto panelScene = new PanelSceneModel(aSceneTypeCode);
   panelScene->setParentScene(panelScene);
   panelScene->setChildScene(panelScene);
   panelScene->setNextScene(panelScene);
@@ -34,7 +34,7 @@ PanelScene* PanelScene::createPanelScene(SceneType::SceneTypeCode aSceneTypeCode
   return panelScene;
 }
 
-void PanelScene::updateFields(SceneEvent::SceneEventCode e)
+void PanelSceneModel::updateFields(SceneEvent::SceneEventCode e)
 {
   if (_editFields.empty())
   {
@@ -93,7 +93,7 @@ void PanelScene::updateFields(SceneEvent::SceneEventCode e)
 
 }
 
-PanelScene* PanelScene::getNextScene(SceneEvent::SceneEventCode e)
+PanelSceneModel* PanelSceneModel::getNextScene(SceneEvent::SceneEventCode e)
 {
   LOG("this: %p", this);
   switch (e)
@@ -119,64 +119,64 @@ PanelScene* PanelScene::getNextScene(SceneEvent::SceneEventCode e)
   }
 }
 
-std::vector<int> PanelScene::getFields()
+std::vector<int> PanelSceneModel::getFields()
 {
   return _editFields;
 }
 
-void PanelScene::setFields(std::vector<int> aFields)
+void PanelSceneModel::setFields(std::vector<int> aFields)
 {
   _isEditScene = true;
   _editFields = aFields;
   _savedFields = aFields;
 }
 
-bool PanelScene::isEditScene()
+bool PanelSceneModel::isEditScene()
 {
   return _isEditScene;
 }
 
-PanelScene* PanelScene::getParentScene()
+PanelSceneModel* PanelSceneModel::getParentScene()
 {
   return _parentScene;
 }
 
-PanelScene* PanelScene::getChildScene()
+PanelSceneModel* PanelSceneModel::getChildScene()
 {
   return _childScene;
 }
 
-PanelScene* PanelScene::getNextScene()
+PanelSceneModel* PanelSceneModel::getNextScene()
 {
   return _nextScene;
 }
 
-PanelScene* PanelScene::getPrevScene()
+PanelSceneModel* PanelSceneModel::getPrevScene()
 {
   return _prevScene;
 }
 
-void PanelScene::setParentScene(PanelScene* aParentScene)
+void PanelSceneModel::setParentScene(PanelSceneModel* aParentScene)
 {
   _parentScene = aParentScene;
 }
 
-void PanelScene::setNextScene(PanelScene* aNextScene)
+void PanelSceneModel::setNextScene(PanelSceneModel* aNextScene)
 {
   _nextScene = aNextScene;
 }
 
-void PanelScene::setPrevScene(PanelScene* aPrevScene)
+void PanelSceneModel::setPrevScene(PanelSceneModel* aPrevScene)
 {
   _prevScene = aPrevScene;
 }
 
-void PanelScene::setChildScene(PanelScene* aChildScene)
+void PanelSceneModel::setChildScene(PanelSceneModel* aChildScene)
 {
   _childScene = aChildScene;
 }
 
-SceneType::SceneTypeCode PanelScene::getSceneType()
+SceneType::SceneTypeCode PanelSceneModel::getSceneType()
 {
   return _sceneTypeCode;
 }

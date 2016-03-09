@@ -7,7 +7,7 @@ namespace input
 {
 
 InputHandler::InputHandler() :
-_doContinue(true)
+Runnable(20)
 {
 }
 
@@ -17,12 +17,9 @@ InputHandler::~InputHandler()
 
 void InputHandler::addPin(unsigned int aPin)
 {
-  LOG("Adding pin: ", aPin);
-
-  if (!_thread)
-  {
-    _pins.push_back(aPin);
-  }
+  LOG("Adding pin: %d", aPin);
+  _pins.push_back(aPin);
+  _pinState[aPin] = 0;
 }
 
 void InputHandler::registerInputReceiver(std::weak_ptr<IInputReceiver> aInputReceiver)
@@ -34,57 +31,20 @@ void InputHandler::registerInputReceiver(std::weak_ptr<IInputReceiver> aInputRec
 
 void InputHandler::work()
 {
-  LOG("");
-  //wiringPiSetup();
-
+  std::vector<PinState> pinState;
   for (auto pinNo : _pins)
   {
-    pinMode(pinNo, INPUT);
-    _pinState[pinNo] = digitalRead(pinNo);
-  }
+    auto pinValue = digitalRead(pinNo);
 
-  while (this->_doContinue)
-  {
-    std::vector<PinState> pinState;
-    for (auto pinNo : _pins)
+    if (pinValue != _pinState[pinNo])
     {
-      auto pinValue = digitalRead(pinNo);
-
-
-      if (pinValue != _pinState[pinNo])
-      {
-        sendInputEvent(pinNo, _pinState[pinNo], pinValue);
-      }
-
-      _pinState[pinNo] = pinValue;
-
+      sendInputEvent(pinNo, _pinState[pinNo], pinValue);
     }
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(20));
-  }
-}
+    _pinState[pinNo] = pinValue;
 
-void InputHandler::start()
-{
-  LOG("Starting thread.");
-
-  if (_thread)
-  {
-    LOG("InputHandler already started.");
-    return;
   }
 
-  _thread = std::make_shared<std::thread>(&InputHandler::work, this);
-
-}
-
-void InputHandler::stop()
-{
-  LOG("");
-
-  _doContinue = false;
-
-  _thread->join();
 }
 
 void InputHandler::sendInputEvent(

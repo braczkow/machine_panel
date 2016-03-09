@@ -7,6 +7,7 @@
 #include <mutex>
 #include <vector>
 #include <map>
+#include <atomic>
 
 namespace input
 {
@@ -25,7 +26,7 @@ struct PinState
   unsigned int pinNo;
   unsigned int pinState;
 };
-class InputHandler //: public Runnable
+class InputHandler : public Runnable
 {
 public:
   InputHandler();
@@ -34,9 +35,6 @@ public:
   void addPin(unsigned int aPin);
 
   void registerInputReceiver(std::weak_ptr<IInputReceiver> aInputReceiver);
-
-  void start();
-  void stop();
   
 protected:
   void work();
@@ -50,12 +48,7 @@ private:
   std::map<unsigned int, int> _pinState;
   std::vector<unsigned int> _pins;
 
-  std::shared_ptr<std::thread> _thread;
   std::vector<std::weak_ptr<IInputReceiver> > _inputReceivers;
-
-  bool _doContinue;
-
-
 
 };
 

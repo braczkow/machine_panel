@@ -8,13 +8,13 @@ _panelConfig(aPanelConfig)
 {
   LOG("");
 
-  auto main = model::PanelScene::createPanelScene(model::SceneType::MAIN_SCENE);
-  auto sunrise = model::PanelScene::createPanelScene(model::SceneType::SUNRISE_SCENE);
-  auto sunrise_edit = model::PanelScene::createPanelScene(model::SceneType::SUNRISE_EDIT);
+  auto main = model::PanelSceneModel::createPanelScene(model::SceneType::MAIN_SCENE);
+  auto sunrise = model::PanelSceneModel::createPanelScene(model::SceneType::SUNRISE_SCENE);
+  auto sunrise_edit = model::PanelSceneModel::createPanelScene(model::SceneType::SUNRISE_EDIT);
   sunrise_edit->setFields(_machineModel.getSunRiseAsVector());
 
-  auto sundown = model::PanelScene::createPanelScene(model::SceneType::SUNDOWN_SCENE);
-  auto sundown_edit = model::PanelScene::createPanelScene(model::SceneType::SUNDOWN_EDIT);
+  auto sundown = model::PanelSceneModel::createPanelScene(model::SceneType::SUNDOWN_SCENE);
+  auto sundown_edit = model::PanelSceneModel::createPanelScene(model::SceneType::SUNDOWN_EDIT);
   sundown_edit->setFields(_machineModel.getSunDownAsVector());
 
   main->setNextScene(sunrise);
@@ -34,11 +34,11 @@ _panelConfig(aPanelConfig)
 
   _currentScene = main;
 
-  _panelScenes.push_back(std::unique_ptr<model::PanelScene>(main));
-  _panelScenes.push_back(std::unique_ptr<model::PanelScene>(sunrise));
-  _panelScenes.push_back(std::unique_ptr<model::PanelScene>(sunrise_edit));
-  _panelScenes.push_back(std::unique_ptr<model::PanelScene>(sundown));
-  _panelScenes.push_back(std::unique_ptr<model::PanelScene>(sundown_edit));
+  _panelScenes.push_back(std::unique_ptr<model::PanelSceneModel>(main));
+  _panelScenes.push_back(std::unique_ptr<model::PanelSceneModel>(sunrise));
+  _panelScenes.push_back(std::unique_ptr<model::PanelSceneModel>(sunrise_edit));
+  _panelScenes.push_back(std::unique_ptr<model::PanelSceneModel>(sundown));
+  _panelScenes.push_back(std::unique_ptr<model::PanelSceneModel>(sundown_edit));
   
   _lcdView = std::make_shared<view::LcdView>(_panelConfig);
 
@@ -65,6 +65,8 @@ void PanelController::start()
   _inputHandler.registerInputReceiver(shared_from_this());
 
   _inputHandler.start();
+  
+  _machineModel.start();
 }
 
 void PanelController::work()
@@ -81,6 +83,7 @@ void PanelController::work()
     processInputEvent(e);
   }
 
+  updateView();
 }
 
 void PanelController::processInputEvent(const input::InputEvent& e)
@@ -105,7 +108,6 @@ void PanelController::processInputEvent(const input::InputEvent& e)
 
   _currentScene = _currentScene->getNextScene(sceneEvent);
 
-  updateView();
 }
 
 model::SceneEvent::SceneEventCode 

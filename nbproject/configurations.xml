@@ -8,20 +8,27 @@
         <itemPath>json/json-forwards.h</itemPath>
         <itemPath>json/json.h</itemPath>
       </logicalFolder>
+      <logicalFolder name="f1" displayName="panel" projectFiles="true">
+        <itemPath>LcdView.h</itemPath>
+        <itemPath>PanelConfig.h</itemPath>
+        <itemPath>PanelController.h</itemPath>
+        <itemPath>PanelMachineModel.h</itemPath>
+        <itemPath>PanelSceneModel.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f2" displayName="utils" projectFiles="true">
+        <itemPath>Registry.h</itemPath>
+        <itemPath>Runnable.h</itemPath>
+        <itemPath>Service.h</itemPath>
+        <itemPath>log.h</itemPath>
+      </logicalFolder>
       <itemPath>IInputReceiver.h</itemPath>
-      <itemPath>IPanelScene.h</itemPath>
       <itemPath>InputHandler.h</itemPath>
-      <itemPath>LcdView.h</itemPath>
+      <itemPath>MCP3008.h</itemPath>
       <itemPath>MachineClient.h</itemPath>
-      <itemPath>MachineModel.h</itemPath>
       <itemPath>MachineRequest.h</itemPath>
       <itemPath>MachineResponse.h</itemPath>
       <itemPath>MachineService.h</itemPath>
-      <itemPath>PanelConfig.h</itemPath>
-      <itemPath>PanelController.h</itemPath>
-      <itemPath>PanelScene.h</itemPath>
-      <itemPath>Runnable.h</itemPath>
-      <itemPath>log.h</itemPath>
+      <itemPath>RemoteDevice.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -30,14 +37,21 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <logicalFolder name="f1" displayName="panel" projectFiles="true">
+        <itemPath>LcdView.cpp</itemPath>
+        <itemPath>PanelConfig.cpp</itemPath>
+        <itemPath>PanelController.cpp</itemPath>
+        <itemPath>PanelMachineModel.cpp</itemPath>
+        <itemPath>PanelSceneModel.cpp</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f2" displayName="utils" projectFiles="true">
+        <itemPath>Runnable.cpp</itemPath>
+      </logicalFolder>
       <itemPath>InputHandler.cpp</itemPath>
-      <itemPath>LcdView.cpp</itemPath>
+      <itemPath>MCP3008.cpp</itemPath>
       <itemPath>MachineClient.cpp</itemPath>
-      <itemPath>MachineModel.cpp</itemPath>
       <itemPath>MachineService.cpp</itemPath>
-      <itemPath>PanelConfig.cpp</itemPath>
-      <itemPath>PanelController.cpp</itemPath>
-      <itemPath>PanelScene.cpp</itemPath>
+      <itemPath>RemoteDevice.cpp</itemPath>
       <itemPath>jsoncpp.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
@@ -83,8 +97,6 @@
       </compileType>
       <item path="IInputReceiver.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="IPanelScene.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="InputHandler.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="InputHandler.h" ex="false" tool="3" flavor2="0">
@@ -93,13 +105,13 @@
       </item>
       <item path="LcdView.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="MCP3008.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="MCP3008.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="MachineClient.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="MachineClient.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="MachineModel.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="MachineModel.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="MachineRequest.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -117,11 +129,25 @@
       </item>
       <item path="PanelController.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="PanelScene.cpp" ex="false" tool="1" flavor2="0">
+      <item path="PanelMachineModel.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="PanelScene.h" ex="false" tool="3" flavor2="0">
+      <item path="PanelMachineModel.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="PanelSceneModel.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="PanelSceneModel.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Registry.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="RemoteDevice.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="RemoteDevice.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Runnable.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Runnable.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Service.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="json/json-forwards.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -156,8 +182,6 @@
       </compileType>
       <item path="IInputReceiver.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="IPanelScene.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="InputHandler.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="InputHandler.h" ex="false" tool="3" flavor2="0">
@@ -166,13 +190,13 @@
       </item>
       <item path="LcdView.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="MCP3008.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="MCP3008.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="MachineClient.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="MachineClient.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="MachineModel.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="MachineModel.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="MachineRequest.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -190,11 +214,25 @@
       </item>
       <item path="PanelController.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="PanelScene.cpp" ex="false" tool="1" flavor2="0">
+      <item path="PanelMachineModel.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="PanelScene.h" ex="false" tool="3" flavor2="0">
+      <item path="PanelMachineModel.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="PanelSceneModel.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="PanelSceneModel.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Registry.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="RemoteDevice.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="RemoteDevice.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Runnable.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Runnable.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Service.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="json/json-forwards.h" ex="false" tool="3" flavor2="0">
       </item>

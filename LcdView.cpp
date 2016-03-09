@@ -32,8 +32,8 @@ LcdView::~LcdView()
 }
 
 void LcdView::renderScene(
-        model::PanelScene* aCurrentScene,
-        model::MachineModel aMachineModel)
+        model::PanelSceneModel* aCurrentScene,
+        const model::PanelMachineModel& aMachineModel)
 {
   LOG("");
 
@@ -44,7 +44,7 @@ void LcdView::renderScene(
     {
       lcdClear(fd);
       lcdPosition(fd, 0, 0);
-      lcdPrintf(fd, "MAIN_SCENE");
+      lcdPrintf(fd, "Main|T: %g|", aMachineModel.getTemperature());
 
       LOG("MAIN_SCENE");
       break;
@@ -81,7 +81,7 @@ void LcdView::renderScene(
       lcdPrintf(fd, "START: %dh%d'", editFields[0], editFields[1]);
       lcdPosition(fd, 0, 1);
       lcdPrintf(fd, "END:   %dh%d'", editFields[2], editFields[3]);
-            
+
 
       LOG("SUNRISE_EDIT |%d:%d| |%d:%d|",
           editFields[0], editFields[1], editFields[2], editFields[3]);

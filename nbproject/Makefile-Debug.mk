@@ -37,12 +37,15 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/InputHandler.o \
 	${OBJECTDIR}/LcdView.o \
+	${OBJECTDIR}/MCP3008.o \
 	${OBJECTDIR}/MachineClient.o \
-	${OBJECTDIR}/MachineModel.o \
 	${OBJECTDIR}/MachineService.o \
 	${OBJECTDIR}/PanelConfig.o \
 	${OBJECTDIR}/PanelController.o \
-	${OBJECTDIR}/PanelScene.o \
+	${OBJECTDIR}/PanelMachineModel.o \
+	${OBJECTDIR}/PanelSceneModel.o \
+	${OBJECTDIR}/RemoteDevice.o \
+	${OBJECTDIR}/Runnable.o \
 	${OBJECTDIR}/jsoncpp.o \
 	${OBJECTDIR}/main.o
 
@@ -81,15 +84,15 @@ ${OBJECTDIR}/LcdView.o: LcdView.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/LcdView.o LcdView.cpp
 
+${OBJECTDIR}/MCP3008.o: MCP3008.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MCP3008.o MCP3008.cpp
+
 ${OBJECTDIR}/MachineClient.o: MachineClient.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MachineClient.o MachineClient.cpp
-
-${OBJECTDIR}/MachineModel.o: MachineModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MachineModel.o MachineModel.cpp
 
 ${OBJECTDIR}/MachineService.o: MachineService.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -106,10 +109,25 @@ ${OBJECTDIR}/PanelController.o: PanelController.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/PanelController.o PanelController.cpp
 
-${OBJECTDIR}/PanelScene.o: PanelScene.cpp 
+${OBJECTDIR}/PanelMachineModel.o: PanelMachineModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/PanelScene.o PanelScene.cpp
+	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/PanelMachineModel.o PanelMachineModel.cpp
+
+${OBJECTDIR}/PanelSceneModel.o: PanelSceneModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/PanelSceneModel.o PanelSceneModel.cpp
+
+${OBJECTDIR}/RemoteDevice.o: RemoteDevice.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/RemoteDevice.o RemoteDevice.cpp
+
+${OBJECTDIR}/Runnable.o: Runnable.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Runnable.o Runnable.cpp
 
 ${OBJECTDIR}/jsoncpp.o: jsoncpp.cpp 
 	${MKDIR} -p ${OBJECTDIR}

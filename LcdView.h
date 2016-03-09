@@ -1,7 +1,7 @@
 #pragma once
 #include "PanelConfig.h"
-#include "PanelScene.h"
-#include "MachineModel.h"
+#include "PanelSceneModel.h"
+#include "PanelMachineModel.h"
 #include <vector>
 
 namespace view
@@ -13,8 +13,8 @@ public:
   ~LcdView();
   
   void renderScene(
-  model::PanelScene* aCurrentScene, 
-  model::MachineModel aMachineModel);
+  model::PanelSceneModel* aCurrentScene, 
+  const model::PanelMachineModel& aMachineModel);
 
   void print(const std::vector<std::string>& aLines);
 

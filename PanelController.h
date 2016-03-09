@@ -3,9 +3,8 @@
 #include "InputHandler.h"
 #include "IInputReceiver.h"
 #include "PanelConfig.h"
-#include "IPanelScene.h"
-#include "PanelScene.h"
-#include "MachineModel.h"
+#include "PanelSceneModel.h"
+#include "PanelMachineModel.h"
 #include "LcdView.h"
 
 #include <mutex>
@@ -49,9 +48,9 @@ private:
   std::deque<input::InputEvent> _inputQueue;
   std::mutex _mutex;
   
-  std::vector< std::unique_ptr<model::PanelScene> > _panelScenes;
-  model::PanelScene* _currentScene;
-  model::MachineModel _machineModel;
+  std::vector< std::unique_ptr<model::PanelSceneModel> > _panelScenes;
+  model::PanelSceneModel* _currentScene;
+  model::PanelMachineModel _machineModel;
   
   std::shared_ptr<view::LcdView> _lcdView;
 };
