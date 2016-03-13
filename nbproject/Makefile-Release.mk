@@ -40,10 +40,13 @@ OBJECTFILES= \
 	${OBJECTDIR}/MCP3008.o \
 	${OBJECTDIR}/MachineClient.o \
 	${OBJECTDIR}/MachineService.o \
+	${OBJECTDIR}/MessageHandler.o \
 	${OBJECTDIR}/PanelConfig.o \
 	${OBJECTDIR}/PanelController.o \
 	${OBJECTDIR}/PanelMachineModel.o \
 	${OBJECTDIR}/PanelSceneModel.o \
+	${OBJECTDIR}/RemoteControlServer.o \
+	${OBJECTDIR}/RemoteControlSession.o \
 	${OBJECTDIR}/RemoteDevice.o \
 	${OBJECTDIR}/Runnable.o \
 	${OBJECTDIR}/jsoncpp.o \
@@ -99,6 +102,11 @@ ${OBJECTDIR}/MachineService.o: MachineService.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MachineService.o MachineService.cpp
 
+${OBJECTDIR}/MessageHandler.o: MessageHandler.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MessageHandler.o MessageHandler.cpp
+
 ${OBJECTDIR}/PanelConfig.o: PanelConfig.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -118,6 +126,16 @@ ${OBJECTDIR}/PanelSceneModel.o: PanelSceneModel.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/PanelSceneModel.o PanelSceneModel.cpp
+
+${OBJECTDIR}/RemoteControlServer.o: RemoteControlServer.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/RemoteControlServer.o RemoteControlServer.cpp
+
+${OBJECTDIR}/RemoteControlSession.o: RemoteControlSession.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/RemoteControlSession.o RemoteControlSession.cpp
 
 ${OBJECTDIR}/RemoteDevice.o: RemoteDevice.cpp 
 	${MKDIR} -p ${OBJECTDIR}

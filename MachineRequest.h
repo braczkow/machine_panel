@@ -38,5 +38,15 @@ public:
   MachineRequestBase(aClient) {}
 };
 
+class SetSlaveDevicePinRequest : public MachineRequestBase<MachineResponse>
+{
+public:
+  SetSlaveDevicePinRequest(std::shared_ptr<MachineClient> aClient) : 
+  MachineRequestBase(aClient) {}
+  
+  unsigned int pinNo;
+  unsigned int pinState;
+};
+
 
 }

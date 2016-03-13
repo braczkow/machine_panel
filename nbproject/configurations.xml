@@ -8,6 +8,11 @@
         <itemPath>json/json-forwards.h</itemPath>
         <itemPath>json/json.h</itemPath>
       </logicalFolder>
+      <logicalFolder name="f3" displayName="net" projectFiles="true">
+        <itemPath>MessageHandler.h</itemPath>
+        <itemPath>RemoteControlServer.h</itemPath>
+        <itemPath>RemoteControlSession.h</itemPath>
+      </logicalFolder>
       <logicalFolder name="f1" displayName="panel" projectFiles="true">
         <itemPath>LcdView.h</itemPath>
         <itemPath>PanelConfig.h</itemPath>
@@ -37,6 +42,11 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <logicalFolder name="f3" displayName="net" projectFiles="true">
+        <itemPath>MessageHandler.cpp</itemPath>
+        <itemPath>RemoteControlServer.cpp</itemPath>
+        <itemPath>RemoteControlSession.cpp</itemPath>
+      </logicalFolder>
       <logicalFolder name="f1" displayName="panel" projectFiles="true">
         <itemPath>LcdView.cpp</itemPath>
         <itemPath>PanelConfig.cpp</itemPath>
@@ -83,7 +93,7 @@
           <incDir>
             <pElem>.</pElem>
           </incDir>
-          <commandLine>-std=c++11</commandLine>
+          <commandLine>-std=c++11 -I/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT -L/usr/lib/arm-linux-gnueabihf -lSDL</commandLine>
         </ccTool>
         <linkerTool>
           <linkerLibItems>
@@ -121,6 +131,10 @@
       </item>
       <item path="MachineService.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="MessageHandler.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="MessageHandler.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="PanelConfig.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="PanelConfig.h" ex="false" tool="3" flavor2="0">
@@ -138,6 +152,14 @@
       <item path="PanelSceneModel.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Registry.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="RemoteControlServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="RemoteControlServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="RemoteControlSession.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="RemoteControlSession.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="RemoteDevice.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -206,6 +228,10 @@
       </item>
       <item path="MachineService.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="MessageHandler.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="MessageHandler.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="PanelConfig.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="PanelConfig.h" ex="false" tool="3" flavor2="0">
@@ -223,6 +249,14 @@
       <item path="PanelSceneModel.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Registry.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="RemoteControlServer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="RemoteControlServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="RemoteControlSession.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="RemoteControlSession.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="RemoteDevice.cpp" ex="false" tool="1" flavor2="0">
       </item>

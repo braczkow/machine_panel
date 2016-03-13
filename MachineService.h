@@ -14,11 +14,9 @@ namespace dev
 class RemoteDevice;
 }
 
-
 namespace mach
 {
 class MachineRequest;
-
 
 class MachineService : public Runnable, public Service
 {
@@ -36,7 +34,6 @@ protected:
   std::deque<std::shared_ptr<MachineRequest> > _requests;
   
   std::shared_ptr<dev::RemoteDevice> _remoteDevice;
-  
 };
 class MachineRegistry
 {

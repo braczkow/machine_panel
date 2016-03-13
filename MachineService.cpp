@@ -30,7 +30,7 @@ Service::ServiceCode MachineService::getServiceType()
 
 void MachineService::postRequest(std::shared_ptr<MachineRequest> aRequest)
 {
-  LOG("");
+  LOG_DEBUG("");
   std::lock_guard<std::mutex> lock(_mutex);
 
   _requests.push_back(aRequest);
@@ -39,6 +39,7 @@ void MachineService::postRequest(std::shared_ptr<MachineRequest> aRequest)
 
 void MachineService::work()
 {
+  LOG_DEBUG("");
   std::deque<std::shared_ptr<MachineRequest> > requests;
   {
     std::lock_guard<std::mutex> lock(_mutex);
@@ -53,16 +54,16 @@ void MachineService::work()
 
     if (getTemperatureReq)
     {
-      dev::MCP3008 adc(0, 500000);
+      //dev::MCP3008 adc(0, 500000);
 
-      int temp = (int) (adc.readAnalogChannelScaled(0) * 100.0f);
-
-      auto resp = std::make_shared<GetTemperatureResponse>();
-      resp->temperature = temp * 3.3f;
-
-      auto response = std::bind(getTemperatureReq->responseCallback, resp);
-
-      getTemperatureReq->client->registerResponse(response);
+//      int temp = (int) (adc.readAnalogChannelScaled(0) * 100.0f);
+//
+//      auto resp = std::make_shared<GetTemperatureResponse>();
+//      resp->temperature = temp * 3.3f;
+//
+//      auto response = std::bind(getTemperatureReq->responseCallback, resp);
+//
+//      getTemperatureReq->client->registerResponse(response);
     }
 
   }

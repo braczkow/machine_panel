@@ -3,8 +3,8 @@
 namespace ctrl
 {
 
-PanelController::PanelController(std::shared_ptr<cfg::PanelConfig> aPanelConfig) :
-_panelConfig(aPanelConfig)
+PanelController::PanelController(std::shared_ptr<cfg::PanelConfig> aPanelConfig, unsigned int aMillis) :
+Runnable(aMillis), _panelConfig(aPanelConfig)
 {
   LOG("");
 
@@ -39,8 +39,15 @@ _panelConfig(aPanelConfig)
   _panelScenes.push_back(std::unique_ptr<model::PanelSceneModel>(sunrise_edit));
   _panelScenes.push_back(std::unique_ptr<model::PanelSceneModel>(sundown));
   _panelScenes.push_back(std::unique_ptr<model::PanelSceneModel>(sundown_edit));
-  
+
   _lcdView = std::make_shared<view::LcdView>(_panelConfig);
+
+  _inputHandler.addPin(_panelConfig->buttonConfig.upBtnPin);
+  _inputHandler.addPin(_panelConfig->buttonConfig.downBtnPin);
+  _inputHandler.addPin(_panelConfig->buttonConfig.leftBtnPin);
+  _inputHandler.addPin(_panelConfig->buttonConfig.rightBtnPin);
+  _inputHandler.addPin(_panelConfig->buttonConfig.okBtnPin);
+  _inputHandler.addPin(_panelConfig->buttonConfig.backBtnPin);
 
 }
 
@@ -54,19 +61,13 @@ PanelController::~PanelController()
 
 void PanelController::start()
 {
-  _inputHandler.addPin(_panelConfig->buttonConfig.upBtnPin);
-  _inputHandler.addPin(_panelConfig->buttonConfig.downBtnPin);
-  _inputHandler.addPin(_panelConfig->buttonConfig.leftBtnPin);
-  _inputHandler.addPin(_panelConfig->buttonConfig.rightBtnPin);
-  _inputHandler.addPin(_panelConfig->buttonConfig.okBtnPin);
-  _inputHandler.addPin(_panelConfig->buttonConfig.backBtnPin);
-
-
   _inputHandler.registerInputReceiver(shared_from_this());
 
   _inputHandler.start();
-  
+
   _machineModel.start();
+
+  Runnable::start();
 }
 
 void PanelController::work()
@@ -95,7 +96,7 @@ void PanelController::processInputEvent(const input::InputEvent& e)
   }
 
   model::SceneEvent::SceneEventCode sceneEvent = getSceneEventByInputEvent(e);
-  
+
 
 
   _currentScene->updateFields(sceneEvent);
@@ -110,7 +111,7 @@ void PanelController::processInputEvent(const input::InputEvent& e)
 
 }
 
-model::SceneEvent::SceneEventCode 
+model::SceneEvent::SceneEventCode
 PanelController::getSceneEventByInputEvent(const input::InputEvent& e)
 {
   LOG("");
@@ -138,7 +139,7 @@ PanelController::getSceneEventByInputEvent(const input::InputEvent& e)
   {
     return model::SceneEvent::KEY_BACK;
   }
-  
+
   throw ControllerException("Unknown input event.");
 }
 
@@ -146,33 +147,31 @@ void PanelController::handleOkOnEditScene()
 {
   LOG("");
   auto sceneType = _currentScene->getSceneType();
-  
+
   switch (sceneType)
   {
     case model::SceneType::SUNRISE_EDIT:
     {
       auto fields = _currentScene->getFields();
-      _machineModel.setSunRise( fields[0], fields[1], fields[2], fields[3] );
+      _machineModel.setSunRise(fields[0], fields[1], fields[2], fields[3]);
 
       break;
     }
     case model::SceneType::SUNDOWN_EDIT:
     {
       auto fields = _currentScene->getFields();
-      _machineModel.setSunDown( fields[0], fields[1], fields[2], fields[3] );
+      _machineModel.setSunDown(fields[0], fields[1], fields[2], fields[3]);
       break;
     }
   }
-  
-  
 }
 
 void PanelController::updateView()
 {
-  LOG("");
-  
+  LOG_DEBUG("");
+
   _lcdView->renderScene(_currentScene, _machineModel);
- 
+
 }
 
 void PanelController::onInputEvent(input::InputEvent e)

@@ -1,5 +1,6 @@
 #pragma once
 #include "log.h"
+#include "Runnable.h"
 #include "InputHandler.h"
 #include "IInputReceiver.h"
 #include "PanelConfig.h"
@@ -26,10 +27,10 @@ public:
 };
 
 
-class PanelController : public input::IInputReceiver, public std::enable_shared_from_this<PanelController>
+class PanelController : public input::IInputReceiver, public std::enable_shared_from_this<PanelController>, public Runnable
 {
 public:
-  PanelController(std::shared_ptr<cfg::PanelConfig> aPanelConfig);
+  PanelController(std::shared_ptr<cfg::PanelConfig> aPanelConfig, unsigned int aMillis = 200);
   virtual ~PanelController();
   
   virtual void start();

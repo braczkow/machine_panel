@@ -29,7 +29,7 @@ PanelMachineModel::~PanelMachineModel()
 
 void PanelMachineModel::work()
 {
-  LOG("");
+  LOG_DEBUG("");
 
   auto callback = [this](std::shared_ptr<mach::GetTemperatureResponse> aResp)
   {

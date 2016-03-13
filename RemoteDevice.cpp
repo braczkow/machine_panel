@@ -10,9 +10,6 @@ _baud(aBaud)
 {
   LOG("");
   _fd = serialOpen(aDevice.c_str(), _baud);
-  
-  if (_fd == -1)
-    throw 1;
 }
 
 int RemoteDevice::getId()
