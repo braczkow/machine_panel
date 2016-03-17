@@ -37,6 +37,14 @@ public:
   ~PanelMachineModel();
   
   float getTemperature() const;
+  float getHisteresis() const;
+  
+  unsigned int getHours() const;
+  unsigned int getMinutes() const;
+  unsigned int getSeconds() const;
+  
+  unsigned int getDay() const;
+  std::string getMonth() const;
   
   SunPath getSunRise() const;
   std::vector<int> getSunRiseAsVector() const;

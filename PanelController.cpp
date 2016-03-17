@@ -1,4 +1,5 @@
 #include "PanelController.h"
+#include "Ili9341View.h"
 
 namespace ctrl
 {
@@ -40,7 +41,8 @@ Runnable(aMillis), _panelConfig(aPanelConfig)
   _panelScenes.push_back(std::unique_ptr<model::PanelSceneModel>(sundown));
   _panelScenes.push_back(std::unique_ptr<model::PanelSceneModel>(sundown_edit));
 
-  _lcdView = std::make_shared<view::LcdView>(_panelConfig);
+  _panelView = std::make_shared<view::Ili9341View>();
+  //_panelView = std::make_shared<view::LcdView>(_panelConfig);
 
   _inputHandler.addPin(_panelConfig->buttonConfig.upBtnPin);
   _inputHandler.addPin(_panelConfig->buttonConfig.downBtnPin);
@@ -68,6 +70,13 @@ void PanelController::start()
   _machineModel.start();
 
   Runnable::start();
+}
+
+void PanelController::stop()
+{
+  _machineModel.stop();
+  _inputHandler.stop();
+  Runnable::stop();
 }
 
 void PanelController::work()
@@ -170,7 +179,7 @@ void PanelController::updateView()
 {
   LOG_DEBUG("");
 
-  _lcdView->renderScene(_currentScene, _machineModel);
+  _panelView->renderScene(_currentScene, _machineModel);
 
 }
 

@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/Ili9341View.o \
 	${OBJECTDIR}/InputHandler.o \
 	${OBJECTDIR}/LcdView.o \
 	${OBJECTDIR}/MCP3008.o \
@@ -49,6 +50,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/RemoteControlSession.o \
 	${OBJECTDIR}/RemoteDevice.o \
 	${OBJECTDIR}/Runnable.o \
+	${OBJECTDIR}/TFTViewEngine.o \
 	${OBJECTDIR}/jsoncpp.o \
 	${OBJECTDIR}/main.o
 
@@ -67,7 +69,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-lboost_filesystem -lboost_system -lwiringPi -lpthread -lwiringPiDev
+LDLIBSOPTIONS=-lboost_filesystem -lboost_system -lwiringPi -lpthread -lwiringPiDev -lSDL_ttf
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -76,6 +78,11 @@ LDLIBSOPTIONS=-lboost_filesystem -lboost_system -lwiringPi -lpthread -lwiringPiD
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/machine_panel: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/machine_panel ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/Ili9341View.o: Ili9341View.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Ili9341View.o Ili9341View.cpp
 
 ${OBJECTDIR}/InputHandler.o: InputHandler.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -146,6 +153,11 @@ ${OBJECTDIR}/Runnable.o: Runnable.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Runnable.o Runnable.cpp
+
+${OBJECTDIR}/TFTViewEngine.o: TFTViewEngine.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TFTViewEngine.o TFTViewEngine.cpp
 
 ${OBJECTDIR}/jsoncpp.o: jsoncpp.cpp 
 	${MKDIR} -p ${OBJECTDIR}

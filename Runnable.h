@@ -16,7 +16,7 @@ public:
 protected:
   virtual void work() = 0;
   std::atomic_bool _doContinue;
-private:
+  
   void workLoop();
   unsigned int _millis;
   std::shared_ptr<std::thread> _thread;

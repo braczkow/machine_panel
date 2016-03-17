@@ -14,13 +14,17 @@
         <itemPath>RemoteControlSession.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="panel" projectFiles="true">
+        <itemPath>IPanelView.h</itemPath>
+        <itemPath>Ili9341View.h</itemPath>
         <itemPath>LcdView.h</itemPath>
         <itemPath>PanelConfig.h</itemPath>
         <itemPath>PanelController.h</itemPath>
         <itemPath>PanelMachineModel.h</itemPath>
         <itemPath>PanelSceneModel.h</itemPath>
+        <itemPath>TFTViewEngine.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="utils" projectFiles="true">
+        <itemPath>Exception.h</itemPath>
         <itemPath>Registry.h</itemPath>
         <itemPath>Runnable.h</itemPath>
         <itemPath>Service.h</itemPath>
@@ -48,11 +52,13 @@
         <itemPath>RemoteControlSession.cpp</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="panel" projectFiles="true">
+        <itemPath>Ili9341View.cpp</itemPath>
         <itemPath>LcdView.cpp</itemPath>
         <itemPath>PanelConfig.cpp</itemPath>
         <itemPath>PanelController.cpp</itemPath>
         <itemPath>PanelMachineModel.cpp</itemPath>
         <itemPath>PanelSceneModel.cpp</itemPath>
+        <itemPath>TFTViewEngine.cpp</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="utils" projectFiles="true">
         <itemPath>Runnable.cpp</itemPath>
@@ -102,10 +108,19 @@
             <linkerOptionItem>-lwiringPi</linkerOptionItem>
             <linkerOptionItem>-lpthread</linkerOptionItem>
             <linkerOptionItem>-lwiringPiDev</linkerOptionItem>
+            <linkerOptionItem>-lSDL_ttf</linkerOptionItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="Exception.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="IInputReceiver.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="IPanelView.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Ili9341View.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Ili9341View.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="InputHandler.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -170,6 +185,10 @@
       <item path="Runnable.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Service.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TFTViewEngine.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="TFTViewEngine.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="json/json-forwards.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -202,7 +221,15 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="Exception.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="IInputReceiver.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="IPanelView.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Ili9341View.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Ili9341View.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="InputHandler.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -267,6 +294,10 @@
       <item path="Runnable.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Service.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TFTViewEngine.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="TFTViewEngine.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="json/json-forwards.h" ex="false" tool="3" flavor2="0">
       </item>

@@ -1,5 +1,5 @@
 #include "Runnable.h"
-
+#include "log.h"
 #include <chrono>
 
 Runnable::Runnable(unsigned int millis) :

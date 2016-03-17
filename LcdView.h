@@ -1,4 +1,5 @@
 #pragma once
+#include "IPanelView.h"
 #include "PanelConfig.h"
 #include "PanelSceneModel.h"
 #include "PanelMachineModel.h"
@@ -6,13 +7,13 @@
 
 namespace view
 {
-class LcdView
+class LcdView : public IPanelView
 {
 public:
   LcdView(std::shared_ptr<cfg::PanelConfig> aPanelConfig);
-  ~LcdView();
+  virtual ~LcdView();
   
-  void renderScene(
+  virtual void renderScene(
   model::PanelSceneModel* aCurrentScene, 
   const model::PanelMachineModel& aMachineModel);
 

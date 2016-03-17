@@ -17,53 +17,56 @@ public:
   {
     return _what.c_str();
   }
-  
   static TFTViewEngineException ColorNotFound()
   {
     return TFTViewEngineException("ColorNotFound");
   }
-  
-    static TFTViewEngineException FontNotFound()
+  static TFTViewEngineException FontNotFound()
   {
     return TFTViewEngineException("FontNotFound");
   }
-  
+  static TFTViewEngineException ImageLoadException()
+  {
+    return TFTViewEngineException("ImageLoadException");
+  }
+
   std::string _what;
 };
 
 class TFTViewEngine
 {
-public: 
+public:
+  typedef int IdType;
+
   ~TFTViewEngine();
   static TFTViewEngine* getSDLView();
-  
-  void loadFont(const std::string&, unsigned int, const std::string&);
-  void loadColor(SDL_Color, const std::string&);
-  
-  
-  void setDefaultClearScreenColor(const std::string& aColorName);
-  void setDefaultFont(const std::string& aFontName);
-  void setDefaultFontColor(const std::string& aFontColorName);
 
-  void clearScreen();
-  void clearScreen(const SDL_Color&);
-  void renderText(const std::string& aText, int x, int y, const std::string& aFontName = "", const std::string& aColorName = "");
+  void loadFont(const std::string&, unsigned int, IdType aId);
+  void loadColor(SDL_Color, IdType aId);
+
+  void clearScreen(IdType aColorId);
+  void renderText(const std::string& aText, int x, int y, IdType aFontId, IdType aColorId);
+
+  void renderImage(const std::string aPath, int x, int y);
+  
+  void renderRect(SDL_Rect aRect, IdType aColorId);
 
   void renderScreen();
-  
+
 private:
   TFTViewEngine();
   TFTViewEngine(TFTViewEngine&);
   TFTViewEngine& operator=(TFTViewEngine&);
 
   std::unique_ptr<SDL_Surface> _screen;
-  std::string _defaultClearScreenColorName;
-  std::string _defaultFontColorName;
-  std::string _defaultFontName;
-  
-  std::map<std::string, TTF_Font* > _fonts;
-  std::map<std::string, SDL_Color> _colors;
-  
+
+  //  std::string _defaultClearScreenColorName;
+  //  std::string _defaultFontColorName;
+  //  std::string _defaultFontName;
+
+  std::map<IdType, TTF_Font* > _fonts;
+  std::map<IdType, SDL_Color> _colors;
+
 };
 
 }

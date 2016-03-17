@@ -40,6 +40,7 @@ _tcp_acceptor(_ioservice, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v
 
 RemoteControlServer::~RemoteControlServer()
 {
+  LOG("dtor");
 }
 
 void RemoteControlServer::do_accept()
@@ -65,9 +66,12 @@ void RemoteControlServer::work()
 
 void RemoteControlServer::stop()
 {
+  LOG("");
+  _doContinue = false;
+  _tcp_acceptor.close();
   _ioservice.stop();
-
-  Runnable::stop();
+  
+  _thread->join();
 }
 
 

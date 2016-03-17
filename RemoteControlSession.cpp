@@ -7,6 +7,7 @@ namespace net
 RemoteControlSession::RemoteControlSession(boost::asio::io_service& ioservice) :
 _socket(ioservice)
 {
+  LOG("ctor");
 }
 
 RemoteControlSession::~RemoteControlSession()

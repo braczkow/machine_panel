@@ -34,6 +34,7 @@ public:
   virtual ~PanelController();
   
   virtual void start();
+  virtual void stop();
   virtual void work();
 
   virtual void onInputEvent(input::InputEvent e);
@@ -53,7 +54,7 @@ private:
   model::PanelSceneModel* _currentScene;
   model::PanelMachineModel _machineModel;
   
-  std::shared_ptr<view::LcdView> _lcdView;
+  std::shared_ptr<view::IPanelView> _panelView;
 };
 }
 
